@@ -2,42 +2,26 @@ public class Solution
 {
     public int StrStr(string haystack, string needle)
     {
-        int index = -1;
-        if (needle.Length > haystack.Length)
-        {
-            return index;
-        }
+        int hayLen = haystack.Length;
+        int needleLen = needle.Length;
+        if (needleLen == 0) { return -1; }
+        if (needleLen > hayLen) { return -1; }
 
-        int j = 0;
-        int startIndex = -1;
-
-        for (int i = 0; i < haystack.Length; i++)
+        for (int i = 0; i <= hayLen - needleLen; i++)
         {
-            if (haystack[i] == needle[j])
+            int j;
+            for (j = 0; j < needleLen; j++)
             {
-                if (startIndex == -1)
+                if (haystack[i + j] != needle[j])
                 {
-                    startIndex = i;
-                }
-
-                if (j == needle.Length - 1)
-                {
-                    index = startIndex;
                     break;
                 }
-
-                j++;
             }
-            else
+            if (j == needleLen)
             {
-                if (startIndex != -1)
-                {
-                    i = startIndex;
-                }
-                j = 0;
-                startIndex = -1;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 }
