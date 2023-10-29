@@ -2,13 +2,16 @@ public class Solution
 {
     public int SearchInsert(int[] nums, int target) 
     {
-        for (int i = 0; i < nums.Length; i++)
+        int maxIndex = nums.Length;
+        if (maxIndex == 0) { return 0; }
+
+        for (int i = 0; i < maxIndex; i++)
         {
             if (nums[i] >= target)
             {
                 return i;
             }
         }
-        return nums.Length;
+        return maxIndex;
     }
 }
