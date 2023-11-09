@@ -3,7 +3,7 @@ public class Solution
     public int CountHomogenous(string s) 
     {
         const int Mod = 1000000007;
-        long result = 0;
+        int result = 0;
         int count = 1;
 
         for (int i = 1; i < s.Length; i++)
@@ -14,12 +14,12 @@ public class Solution
             }
             else
             {
-                result = (result + (long)count * (count + 1) / 2) % Mod;
+                result = (int)((result + (long)count * (count + 1) / 2) % Mod);
                 count = 1;
             }
         }
-        result = (result + (long)count * (count + 1) / 2) % Mod;
+        result = (int)((result + (long)count * (count + 1) / 2) % Mod);
 
-        return (int)result;
+        return result;
     }
 }
