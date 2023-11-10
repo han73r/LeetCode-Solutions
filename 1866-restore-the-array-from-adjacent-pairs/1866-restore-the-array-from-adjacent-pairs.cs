@@ -24,22 +24,29 @@ public class Solution
                 startNode = node.Key;
                 break;
             }
-        }       
-        BuildSequence(adjancyDict, startNode, visited, result);
-        return result.ToArray();
-    }
+        }   
+            
+        Stack<int> stack = new Stack<int>();
+        stack.Push(startNode);
 
-    private void BuildSequence(Dictionary<int, List<int>> dict, int node, HashSet<int> visited, List<int> result)
-    {
-        visited.Add(node);
-        result.Add(node);
-
-        foreach (var neighbor in dict[node])
+        while (stack.Count > 0)
         {
-            if (!visited.Contains(neighbor))
+            int node = stack.Pop();
+
+            if (!visited.Contains(node))
             {
-                BuildSequence(dict, neighbor, visited, result);
+                visited.Add(node);
+                result.Add(node);
+
+                foreach (var neighbor in adjancyDict[node])
+                {
+                    if (!visited.Contains(neighbor))
+                    {
+                        stack.Push(neighbor);
+                    }
+                }
             }
         }
+        return result.ToArray();
     }
 }
