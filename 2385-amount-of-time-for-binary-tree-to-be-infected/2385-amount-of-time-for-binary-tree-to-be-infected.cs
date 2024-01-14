@@ -1,32 +1,47 @@
-using System;
 
+using System;
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 public class Solution
 {
-    public int MinSteps(string s, string t)
+    private int maxi = int.MinValue;
+
+    public int AmountOfTime(TreeNode root, int start)
     {
-        int[] frequencyS = new int[26]; // assuming only lowercase English letters
-        int[] frequencyT = new int[26];
+        CalculateInfectionTime(root, start, true);
+        return maxi;
+    }
 
-        // Count frequencies in string s
-        foreach (char c in s)
+    private int CalculateInfectionTime(TreeNode root, int start, bool isStartNode)
+    {
+        if (root == null) return 0;
+
+        if (root.val == start && isStartNode)
         {
-            frequencyS[c - 'a']++;
+            maxi = Math.Max(maxi, CalculateInfectionTime(root, start, false) - 1);
+            return -1;
         }
 
-        // Count frequencies in string t
-        foreach (char c in t)
+        int leftHeight = CalculateInfectionTime(root.left, start, isStartNode);
+        int rightHeight = CalculateInfectionTime(root.right, start, isStartNode);
+
+        if (leftHeight < 0 || rightHeight < 0)
         {
-            frequencyT[c - 'a']++;
+            maxi = Math.Max(maxi, Math.Abs(leftHeight) + Math.Abs(rightHeight));
+            return Math.Min(leftHeight, rightHeight) - 1;
         }
 
-        // Calculate the absolute difference in frequencies
-        int steps = 0;
-        for (int i = 0; i < 26; i++)
-        {
-            steps += Math.Abs(frequencyS[i] - frequencyT[i]);
-        }
-
-        // The final result is half of the total steps since each step affects two characters
-        return steps / 2;
+        return Math.Max(leftHeight, rightHeight) + 1;
     }
 }
