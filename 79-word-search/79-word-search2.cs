@@ -11,6 +11,9 @@ public class Solution {
             } else if (c == ')') {
                 currentDepth--;
             }
+            if (s.Length - s.IndexOf(c) <= currentDepth) {
+                break;
+            }
         }
         return maxDepth;
     }
