@@ -12,16 +12,40 @@
  * }
  */
 public class Solution {
-    public bool EvaluateTree(TreeNode root) {
+    public TreeNode RemoveLeafNodes(TreeNode root, int target) {
+        DeleteNode(root, target);
+        if (root.left == null && root.right == null && root.val == target) {
+            return null;
+        }
+        return root;
+    }
+
+    private bool DeleteNode(TreeNode root, int target) {
         if (root.left == null && root.right == null) {
-            return root.val == 1;
+            if (root.val == target) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        bool leftValue = EvaluateTree(root.left);
-        bool rightValue = EvaluateTree(root.right);
-        if (root.val == 2) {
-            return leftValue || rightValue; // OR
-        } else {
-            return leftValue && rightValue; // AND
+        if (root.left != null) {
+            if (DeleteNode(root.left, target)) {
+                root.left = null;
+            }
         }
+
+        if (root.right != null) {
+            if (DeleteNode(root.right, target)) {
+                root.right = null;
+            }
+        }
+        if (root.left == null && root.right == null) {
+            if (root.val == target) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 }
