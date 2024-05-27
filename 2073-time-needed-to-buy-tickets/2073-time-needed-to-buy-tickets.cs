@@ -25,12 +25,4 @@ public class Solution {
         }
         return totalTime;
     }
-}
-
-
-//public interface GetReverseWordCount() {
-//    var text = File.ReadAllText("worldAndPeace.txt");
-//    var words = text.Split(' ');
-//    return words.Distinct()
-//                .Count(word => words.Any(anotherWord => anotherWord == word.Reverse()));
-//}
+} 
