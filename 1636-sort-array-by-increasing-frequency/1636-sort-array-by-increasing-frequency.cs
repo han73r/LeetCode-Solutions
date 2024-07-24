@@ -1,18 +1,20 @@
-// less memory
-public class Solution
-{
-    public int[] TwoSum(int[] nums, int target)
-    {
-    for (int i = 0; i < nums.Length; i++)
-    {
-        for (int j = i + 1; j < nums.Length; j++)
-        {
-            if (nums[i] + nums[j] == target)
-            {
-                return new int[] { i, j };
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution {
+    public int[] FrequencySort(int[] nums) {
+        if (nums.Length == 1) return nums;
+        Dictionary<int, int> frequency = new Dictionary<int, int>();
+        foreach (var num in nums) {
+            if (frequency.ContainsKey(num)) {
+                frequency[num]++;
+            } else {
+                frequency[num] = 1;
             }
         }
-    }
-    return null;
+        var sorted = nums.OrderBy(num => frequency[num])
+                         .ThenByDescending(num => num)
+                         .ToArray();
+        return sorted;
     }
 }
