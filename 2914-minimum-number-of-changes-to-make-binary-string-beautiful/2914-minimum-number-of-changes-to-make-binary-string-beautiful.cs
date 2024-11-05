@@ -1,18 +1,11 @@
-// less memory
-public class Solution
-{
-    public int[] TwoSum(int[] nums, int target)
-    {
-    for (int i = 0; i < nums.Length; i++)
-    {
-        for (int j = i + 1; j < nums.Length; j++)
-        {
-            if (nums[i] + nums[j] == target)
-            {
-                return new int[] { i, j };
+public class Solution {
+    public int MinChanges(string s) {
+        int changes = 0;
+        for (int i = 0; i < s.Length; i += 2) {
+            if (s[i] != s[i + 1]) {
+                changes++;
             }
         }
-    }
-    return null;
+        return changes;
     }
 }
