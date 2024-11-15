@@ -1,27 +1,22 @@
-using System.Linq;
 using System;
 
 public class Solution {
-    private bool CanDistribute(int x, int[] quantities, int n) {
-        int stores = 0;
-        foreach (int q in quantities) {
-            stores += (int)Math.Ceiling((double)q / x);
-        }
-        return stores <= n;
-    }
-    public int MinimizedMaximum(int n, int[] quantities) {
-        int left = 1;
-        int right = quantities.Max();
-        int result = 0;
-        while (left <= right) {
-            int x = (left + right) / 2;
-            if (CanDistribute(x, quantities, n)) {
-                result = x;
-                right = x - 1;
+    public int FindLengthOfShortestSubarray(int[] arr) {
+        int n = arr.Length;
+        int left = 0, right = n - 1;
+        while (left < n - 1 && arr[left] <= arr[left + 1]) left++;
+        if (left == n - 1) return 0;
+        while (right > 0 && arr[right - 1] <= arr[right]) right--;
+        int minToRemove = Math.Min(n - left - 1, right);
+        int i = 0, j = right;
+        while (i <= left && j < n) {
+            if (arr[i] <= arr[j]) {
+                minToRemove = Math.Min(minToRemove, j - i - 1);
+                i++;
             } else {
-                left = x + 1;
+                j++;
             }
         }
-        return result;
+        return minToRemove;
     }
 }
