@@ -1,3 +1,6 @@
+using System.Text;
+using System;
+
 public class Solution {
     public string RepeatLimitedString(string s, int repeatLimit) {
         char[] chars = s.ToCharArray();
