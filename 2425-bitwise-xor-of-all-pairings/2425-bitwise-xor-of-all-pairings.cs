@@ -4,7 +4,7 @@ public class Solution {
         int x1 = 0, x2 = 0;
         if (c1 % 2 != 0)
             foreach (int num in nums2)
-                x2 ^= num;
+                x2 ^= num; 
         if (c2 % 2 != 0)
             foreach (int num in nums1)
                 x1 ^= num;
