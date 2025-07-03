@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System;
 
 public class Solution {
-    private static Dictionary<int, int> memo = new Dictionary<int, int>();
+    private Dictionary<int, int> memo = new Dictionary<int, int>();
     public char KthCharacter(int position) {
         int shiftCount = GetShiftCount(position);
         return (char)('a' + shiftCount);
