@@ -1,18 +1,33 @@
+using System.Collections.Generic;
+
 public class Solution {
-    public int AreaOfMaxDiagonal(int[][] dimensions) {
-        int n = dimensions.Length;
-        int maxArea = 0, maxDiag = 0;
+    public int[][] SortMatrix(int[][] grid) {
+        int n = grid.Length, m = grid[0].Length;
+        var maxHeaps = new Dictionary<int, PriorityQueue<int, int>>();
+        var minHeaps = new Dictionary<int, PriorityQueue<int, int>>();
 
         for (int i = 0; i < n; i++) {
-            int l = dimensions[i][0];
-            int w = dimensions[i][1];
-            int currDiag = l * l + w * w;
-
-            if (currDiag > maxDiag || (currDiag == maxDiag && l * w > maxArea)) {
-                maxDiag = currDiag;
-                maxArea = l * w;
+            for (int j = 0; j < m; j++) {
+                int key = i - j;
+                if (key < 0) {
+                    if (!minHeaps.ContainsKey(key))
+                        minHeaps[key] = new PriorityQueue<int, int>();
+                    minHeaps[key].Enqueue(grid[i][j], grid[i][j]);
+                } else {
+                    if (!maxHeaps.ContainsKey(key))
+                        maxHeaps[key] = new PriorityQueue<int, int>(Comparer<int>.Create((a, b) => b - a));
+                    maxHeaps[key].Enqueue(grid[i][j], grid[i][j]);
+                }
             }
         }
-        return maxArea;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int key = i - j;
+                if (key < 0) grid[i][j] = minHeaps[key].Dequeue();
+                else grid[i][j] = maxHeaps[key].Dequeue();
+            }
+        }
+        return grid;
     }
 }
