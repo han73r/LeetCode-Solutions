@@ -11,7 +11,7 @@ public class Solution {
                 if (IsVowel(s[i - k])) counter--;
                 maxCount = Math.Max(maxCount, counter);
             }
-            return maxCount++;
+            return maxCount;
         }
 
         private bool IsVowel(char c) {
