@@ -1,4 +1,3 @@
-```csharp
 public class Solution {
     public string StoneGameIII(int[] stoneValue) {
         var n = stoneValue.Length;
@@ -23,4 +22,3 @@ public class Solution {
         };
     }
 }
-```
