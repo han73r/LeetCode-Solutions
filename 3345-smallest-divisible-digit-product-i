@@ -1,0 +1,16 @@
+public class Solution {
+    public int SmallestNumber(int n, int t) {
+        while (CountNumber(n) % t != 0) {
+            n++;
+        }
+        return n;
+    }
+    private int CountNumber(int n) {
+        int sum = 1;
+        while (n > 0) {
+            sum *= n % 10;
+            n /= 10;
+        }
+        return sum;
+    }
+}
